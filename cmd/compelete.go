@@ -10,14 +10,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var deleteTaskCmd = &cobra.Command{
-	Use:   "delete",
+var compeleteTaskCmd = &cobra.Command{
+	Use:   "compelete",
 	Short: "",
 	Long:  "",
-	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		id, _ := strconv.ParseUint(args[0], 10, 32)
-		newTask, err := options.DeleteTask(uint(id))
+		newTask, err := options.CompeleteTask(uint(id))
 		if err != nil {
 			return
 		}
@@ -33,5 +32,5 @@ var deleteTaskCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(deleteTaskCmd)
+	rootCmd.AddCommand(compeleteTaskCmd)
 }

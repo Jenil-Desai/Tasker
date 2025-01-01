@@ -14,7 +14,7 @@ type DeleteTaskResponse struct {
 	CreatedOn string
 }
 
-func DeleteTask(taskId uint64) (DeleteTaskResponse, error) {
+func DeleteTask(taskId uint) (DeleteTaskResponse, error) {
 	client := db.NewClient()
 	defer client.Prisma.Disconnect()
 
