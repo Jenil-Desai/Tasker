@@ -11,8 +11,8 @@ import (
 
 var addTaskCmd = &cobra.Command{
 	Use:   "add",
-	Short: "",
-	Long:  "",
+	Short: "Deploy new mission",
+	Long:  "Deploy a new mission to your task radar. Each task can include priority level and due date.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		newTask, err := options.AddTask(args[0])

@@ -12,8 +12,8 @@ import (
 
 var compeleteTaskCmd = &cobra.Command{
 	Use:   "compelete",
-	Short: "",
-	Long:  "",
+	Short: "Mission accomplished",
+	Long:  "Mark mission as accomplished. Updates mission status and maintains it in mission logs for tracking",
 	Run: func(cmd *cobra.Command, args []string) {
 		id, _ := strconv.ParseUint(args[0], 10, 32)
 		newTask, err := options.CompeleteTask(uint(id))

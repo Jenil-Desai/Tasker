@@ -11,8 +11,8 @@ import (
 
 var listTaskCmd = &cobra.Command{
 	Use:   "list",
-	Short: "",
-	Long:  "",
+	Short: "Scan active missions",
+	Long:  "Survey your battlefield - displays all active missions with their status, priority, and timeline. Filter options available",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		allTasks, err := options.ListTask()

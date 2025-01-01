@@ -12,8 +12,8 @@ import (
 
 var deleteTaskCmd = &cobra.Command{
 	Use:   "delete",
-	Short: "",
-	Long:  "",
+	Short: "Abort mission",
+	Long:  "Remove a mission from your command center. Requires mission ID for precise target elimination.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		id, _ := strconv.ParseUint(args[0], 10, 32)

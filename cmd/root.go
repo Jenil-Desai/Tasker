@@ -8,13 +8,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "Tasker",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-	examples and usage of using your application. For example:
-
-	Cobra is a CLI library for Go that empowers applications.
-	This application is a tool to generate the needed files
-	to quickly create a Cobra application.`,
+	Short: "Tasker Command Center - Mission Control Interface",
+	Long:  `Welcome to Tasker Command Center - Your terminal-based mission control interface. Deploy, track, and accomplish tasks with military precision. Awaiting your command, operator.`,
 }
 
 func Execute() {
