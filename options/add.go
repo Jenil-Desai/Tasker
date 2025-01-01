@@ -16,7 +16,12 @@ type AddTaskResponse struct {
 
 func AddTask(task string) (AddTaskResponse, error) {
 	client := db.NewClient()
-	client.Prisma.Connect()
+	defer client.Prisma.Disconnect()
+
+	err := client.Prisma.Connect()
+	if err != nil {
+		return AddTaskResponse{}, fmt.Errorf("failed to connect to the database: %w", err)
+	}
 
 	ctx := context.Background()
 

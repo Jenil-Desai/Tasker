@@ -16,7 +16,12 @@ type DeleteTaskResponse struct {
 
 func DeleteTask(taskId uint64) (DeleteTaskResponse, error) {
 	client := db.NewClient()
-	client.Prisma.Connect()
+	defer client.Prisma.Disconnect()
+
+	err := client.Prisma.Connect()
+	if err != nil {
+		return DeleteTaskResponse{}, fmt.Errorf("failed to connect to the database: %w", err)
+	}
 
 	ctx := context.Background()
 
