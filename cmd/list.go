@@ -6,6 +6,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/Jenil-Desai/Tasker/options"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +18,7 @@ var listTaskCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		allTasks, err := options.ListTask()
 		if err != nil {
+			color.Red("%v", err)
 			return
 		}
 
@@ -29,6 +31,12 @@ var listTaskCmd = &cobra.Command{
 		}
 
 		w.Flush()
+		if len(allTasks) == 0 {
+			color.Blue("\n📡 Command center clear - No active missions detected")
+		} else {
+			color.Cyan("\n📡 Displaying [%v] active missions on radar", len(allTasks))
+		}
+
 	},
 }
 

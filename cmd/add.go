@@ -6,6 +6,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/Jenil-Desai/Tasker/options"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +18,7 @@ var addTaskCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		newTask, err := options.AddTask(args[0])
 		if err != nil {
+			color.Red("%v", err)
 			return
 		}
 
@@ -27,6 +29,8 @@ var addTaskCmd = &cobra.Command{
 		fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", newTask.Id, newTask.Task, newTask.CreatedOn, newTask.Status)
 
 		w.Flush()
+
+		color.Green("\n🎯 Mission [%v] deployed successfully to command center", newTask.Id)
 	},
 }
 

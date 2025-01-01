@@ -7,6 +7,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/Jenil-Desai/Tasker/options"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -19,6 +20,7 @@ var deleteTaskCmd = &cobra.Command{
 		id, _ := strconv.ParseUint(args[0], 10, 32)
 		newTask, err := options.DeleteTask(uint(id))
 		if err != nil {
+			color.Red("%v", err)
 			return
 		}
 
@@ -29,6 +31,8 @@ var deleteTaskCmd = &cobra.Command{
 		fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", newTask.Id, newTask.Task, newTask.CreatedOn, newTask.Status)
 
 		w.Flush()
+
+		color.Yellow("\n⚠️ Mission [%v] has been aborted and cleared from radar", newTask.Id)
 	},
 }
 

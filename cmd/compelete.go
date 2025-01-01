@@ -7,6 +7,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/Jenil-Desai/Tasker/options"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -18,6 +19,7 @@ var compeleteTaskCmd = &cobra.Command{
 		id, _ := strconv.ParseUint(args[0], 10, 32)
 		newTask, err := options.CompeleteTask(uint(id))
 		if err != nil {
+			color.Red("%v", err)
 			return
 		}
 
@@ -28,6 +30,8 @@ var compeleteTaskCmd = &cobra.Command{
 		fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", newTask.Id, newTask.Task, newTask.CreatedOn, newTask.Status)
 
 		w.Flush()
+
+		color.Green("\n✅ Mission [%v] accomplished - Target secured", newTask.Id)
 	},
 }
 
