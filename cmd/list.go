@@ -27,7 +27,12 @@ var listTaskCmd = &cobra.Command{
 
 		fmt.Fprintln(w, "ID\tTask\tCreated On\tStatus")
 		for _, task := range allTasks {
-			fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", task.Id, task.Task, task.CreatedOn, task.Status)
+			if task.Status {
+				fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", task.Id, task.Task, task.CreatedOn, color.GreenString("True"))
+			} else {
+				fmt.Fprintf(w, "%v\t%v\t%v\t%v\n", task.Id, task.Task, task.CreatedOn, color.RedString("Flase"))
+			}
+
 		}
 
 		w.Flush()
