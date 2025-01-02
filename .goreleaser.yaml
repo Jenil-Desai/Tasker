@@ -23,4 +23,7 @@ checksum:
 
 release:
   github:
-    draft: true
+    owner: user
+    name: Tasker
+    name_template: "{{.ProjectName}}-v{{.Version}} {{.Env.USER}}"
+    make_latest: true
