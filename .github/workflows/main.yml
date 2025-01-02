@@ -20,6 +20,45 @@ jobs:
         with:
           go-version: stable
 
+      - name: Determine Next Version
+        id: next_version
+        run: |
+          # Fetch all tags to ensure the latest is available
+          git fetch --tags
+
+          # Get the latest tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+
+          # Parse the tag into components
+          VERSION_REGEX="^v([0-9]+)\.([0-9]+)\.([0-9]+)$"
+          if [[ "$LATEST_TAG" =~ $VERSION_REGEX ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+          else
+            echo "Invalid tag format. Defaulting to v0.0.0"
+            MAJOR=0
+            MINOR=0
+            PATCH=0
+          fi
+
+          # Increment the patch version by default (customize as needed)
+          PATCH=$((PATCH + 1))
+
+          # Generate the next version
+          NEXT_VERSION="v$MAJOR.$MINOR.$PATCH"
+          echo "Next version: $NEXT_VERSION"
+
+          # Expose as GitHub Action output
+          echo "next_version=$NEXT_VERSION" >> $GITHUB_ENV
+
+      - name: Create and Push Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag $NEXT_VERSION
+          git push origin $NEXT_VERSION
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
