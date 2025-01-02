@@ -3,7 +3,7 @@ version: 2
 project_name: Tasker
 
 builds:
-  - main: ./cmd/Tasker
+  - main: ./main.go
     goos:
       - linux
       - darwin
